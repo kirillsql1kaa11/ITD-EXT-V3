@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "ITD EXTENDED",
+  "version": "0.3.0",
+  "description": "ITD EXTENDED — счётчик непрочитанных, аналитика, полные числа, кринж-сканер постов и свой баннер для итд.com",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "permissions": ["storage", "notifications", "tabs", "webRequest"],
+  "host_permissions": ["https://xn--d1ah4a.com/*"],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_title": "ITD EXTENDED"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://xn--d1ah4a.com/*"],
+      "js": ["src/changelog.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://xn--d1ah4a.com/*"],
+      "js": ["src/panel.js", "src/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/icons/*"],
+      "matches": ["https://xn--d1ah4a.com/*"]
+    }
+  ]
+}
